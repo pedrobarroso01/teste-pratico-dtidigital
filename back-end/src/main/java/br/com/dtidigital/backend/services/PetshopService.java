@@ -1,10 +1,15 @@
 package br.com.dtidigital.backend.services;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.dtidigital.backend.models.PetshopModel;
 import br.com.dtidigital.backend.repository.PetshopRepository;
+
 
 @Service
 public class PetshopService {
@@ -12,9 +17,11 @@ public class PetshopService {
     @Autowired
     private PetshopRepository petshopRepository;
 
-    public PetshopModel encontrarMelhorPetshop() {
-        // Implemente a lógica para encontrar o melhor petshop
-        // Calcule os preços e considere a distância e o período (se é final de semana)
-        return new PetshopModel();
+    public int encontrarMelhorPetshop(String data, int qtdPequenos, int qtdGrandes ) {
+        return qtdPequenos;
+    }
+
+    public Iterable<PetshopModel> listar() {
+        return petshopRepository.findAll();
     }
 }
