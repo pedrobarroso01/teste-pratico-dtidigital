@@ -1,0 +1,3 @@
+INSERT INTO petshops (id, nome, distancia, precoPequeno, precoGrande, precoPequenoFDS, precoGrandeFDS) values (1001, 'Meu Canino Feliz', 2000, 20.0, 40.0, 24.0, 48.0);
+INSERT INTO petshops (id, nome, distancia, precoPequeno, precoGrande, precoPequenoFDS, precoGrandeFDS) values (1002, 'Vai Rex', 1700, 15.0, 50.0, 20.0,55.0);
+INSERT INTO petshops (id, nome, distancia, precoPequeno, precoGrande) values (1003, 'ChowChawgas', 800, 30.0, 45.0);
