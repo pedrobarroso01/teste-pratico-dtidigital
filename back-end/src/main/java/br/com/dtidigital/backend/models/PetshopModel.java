@@ -1,21 +1,28 @@
 package br.com.dtidigital.backend.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Entity
+@Entity(name = "petshops")
+@Table(name="petshops")
 public class PetshopModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
     private int distancia;
+    @Column(name = "precopequeno")
     private double precoPequeno;
+    @Column(name = "precogrande")
     private double precoGrande;
-    private double precoPequenoFDS;
-    private double precoGrandeFDS;
+    @Column(name = "precopequenofds")
+    private Double precoPequenoFDS = 0.0;
+    @Column(name = "precograndefds")
+    private Double precoGrandeFDS = 0.0;
 
 
 
