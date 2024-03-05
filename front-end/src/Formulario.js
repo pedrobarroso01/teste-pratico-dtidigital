@@ -1,14 +1,14 @@
-function Formulario({eventoTeclado}) {
+function Formulario({ eventoTeclado, consumir }) {
     return (
-        <form>
+        <form onSubmit={consumir}>
             <label> Data:
-            <input type="date" onChange={eventoTeclado} name="data"/>
+                <input type="date" name="data" onChange={eventoTeclado} />
             </label>
             <label> Cães pequenos: 
-            <input type="number" onChange={eventoTeclado} name="qtdPequenos"/>
+                <input type="number" name="qtdPequenos" onChange={eventoTeclado} />
             </label>
             <label> Cães grandes: 
-            <input type="number" onChange={eventoTeclado} name="qtdGrandes"/>
+                <input type="number" name="qtdGrandes" onChange={eventoTeclado} />
             </label>
             <button type="submit">Enviar</button>
         </form>
