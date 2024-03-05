@@ -4,6 +4,6 @@ CREATE TABLE petshops (
     distancia int not null,
     precoPequeno float not null,
     precoGrande float not null,
-    precoPequenoFDS float null,
-    precoGrandeFDS float null
+    precoPequenoFDS float null default 0.0,
+    precoGrandeFDS float null default 0.0
 );
