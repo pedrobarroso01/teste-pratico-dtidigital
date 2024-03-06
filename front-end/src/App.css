@@ -1,38 +1,92 @@
-.App {
+.header {
+  position: fixed;
+  background-color: #004080;
+  height: 10%;
+  width: 100%;
+}
+
+.header img {
+  position: absolute;
+  height: 50%;
+  left: 2%;
+  top: 25%;
+  border-radius: 100%;
+  border: 1px solid black;
+  width: 50px;
+}
+
+.header h1 {
+  color:white;
   text-align: center;
+  font-family: 'Nunito', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.content img {
+  position: absolute;
+  height: 20%;
+  bottom: 2%;
+  right: 1%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+form {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
-.App-link {
-  color: #61dafb;
+legend {
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  padding:12px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+label {
+  margin-bottom: 10px;
+}
+
+input[type="date"],
+input[type="number"],
+input[type="text"] {
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  background-color: #004080;
 }

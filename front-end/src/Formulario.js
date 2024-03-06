@@ -1,6 +1,7 @@
-function Formulario({ eventoTeclado, consumir }) {
+function Formulario({ eventoTeclado, consumir, resposta }) {
     return (
         <form onSubmit={consumir}>
+            <legend> Encontre o melhor Petshop para você! </legend> <br></br>
             <label> Data:
                 <input type="date" name="data" onChange={eventoTeclado} />
             </label>
@@ -10,7 +11,11 @@ function Formulario({ eventoTeclado, consumir }) {
             <label> Cães grandes: 
                 <input type="number" name="qtdGrandes" onChange={eventoTeclado} />
             </label>
-            <button type="submit">Enviar</button>
+            <button type="submit">Enviar</button> <br></br>
+            <label id = "resposta"> 
+                Reposta: 
+                <input type ="text" value = {resposta} readOnly></input>
+            </label>
         </form>
     );
 };

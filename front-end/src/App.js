@@ -1,6 +1,9 @@
 import './App.css';
 import Formulario from './Formulario';
 import React, { useState } from 'react';
+import pessoa from './pessoa.jpg';
+import dog from './dog.png';
+
 
 function App() {
 
@@ -11,7 +14,8 @@ function App() {
     qtdGrandes: 0
   }
 
-  const [objCanil, setObjCanil] = useState(dados)
+  const [objCanil, setObjCanil] = useState(dados);
+  const [retornoAPI, setRetornoAPI] = useState("");
 
   //Obtendo dados do formulário
   const aoDigitar = (e) => {
@@ -21,7 +25,8 @@ function App() {
 
 
   //Consumindo a API com os dados do formulário
-  const encontrar = () => {
+  const encontrar = (e) => {
+    e.preventDefault(); 
     fetch("http://localhost:8080/petshops/encontrar", {
       method:'post',
       body:JSON.stringify(objCanil),
@@ -29,17 +34,32 @@ function App() {
         'Content-type':'application/json',
         'Accept':'application/json'
       }
-    }).then(retorno => retorno.json())
-    .then(retorno_convertido => {
-      console.log(retorno_convertido);
     })
-   
+    .then(retorno => {
+      if (!retorno.ok) {
+        throw new Error('Erro ao receber a resposta da API');
+      }
+      return retorno.text();
+    })
+    .then(retorno_texto => {
+      console.log("Resposta da API:", retorno_texto);
+      setRetornoAPI(retorno_texto)
+    })
+    .catch(error => {
+      console.error("Erro ao fazer a solicitação:", error);
+    });
   }
 
   return (
     <div className="App">
-      <p>{JSON.stringify(objCanil)}</p>
-      <Formulario eventoTeclado={aoDigitar} consumir={encontrar}/> 
+      <div class = "header">
+        <img src={pessoa}></img>
+        <h1> Cães do Lar Canil</h1>
+      </div>
+      <div class = "content">
+      <Formulario eventoTeclado={aoDigitar} consumir={encontrar} resposta={retornoAPI}/> 
+      <img src={dog}></img>
+      </div>
     </div>
   );
 }
