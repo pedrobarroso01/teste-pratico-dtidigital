@@ -5,6 +5,8 @@
 O sistema foi projetado com uma interface intuitiva e de fácil utilização, visando proporcionar uma experiência amigável ao usuário final. Ele consiste em uma página web especialmente desenvolvida para o canil "Cães do Lar". 
 A página apresenta um formulário simples, composto por campos para inserção de informações, incluindo a data desejada, a quantidade de cães pequenos, a quantidade de cães grandes e um botão para enviar essas informações para o processamento no backend.
 
+Para utilizar o Sistema, será necessário o banco de dados PostgreSQL, além de inicializar o React e o Spring Boot localmente. 
+
 O objetivo principal do sistema é permitir que o usuário forneça esses dados de maneira rápida e eficiente, para que o sistema possa realizar uma verificação automática e apresentar a opção de petshop com o melhor custo-benefício.
 
 ## Linguagens Utilizadas:
