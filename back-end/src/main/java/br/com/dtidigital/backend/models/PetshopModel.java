@@ -24,6 +24,8 @@ public class PetshopModel {
     @Column(name = "precograndefds")
     private Double precoGrandeFDS = 0.0;
 
+    public PetshopModel(String nome, int distancia, double precoPequeno, double precoGrande, double precoPequenoFDS, double precoGrandeFDS) {
+    }
 
 
     public long getId() {
