@@ -24,7 +24,7 @@ public class PetshopController {
 
     @RequestMapping(path="/encontrar",method = RequestMethod.POST)
     public ResponseEntity<?> encontrarMelhorPetshop(@RequestBody PetshopRequest request) {
-        String melhorPetshop = petshopService.encontrarMelhorPetshop(request.getData(), request.getQtdPequenos(), request.getQtdGrandes());
+        ResponseEntity<?> melhorPetshop = petshopService.encontrarMelhorPetshop(request.getData(), request.getQtdPequenos(), request.getQtdGrandes());
         return ResponseEntity.ok(melhorPetshop);
     } 
 

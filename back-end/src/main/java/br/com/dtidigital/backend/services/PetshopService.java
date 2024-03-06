@@ -2,9 +2,11 @@ package br.com.dtidigital.backend.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-
+import br.com.dtidigital.backend.models.ModelResponse;
 import br.com.dtidigital.backend.models.PetshopModel;
 import br.com.dtidigital.backend.repository.PetshopRepository;
 
@@ -20,7 +22,10 @@ public class PetshopService {
     @Autowired
     private PetshopRepository petshopRepository;
 
-    public String encontrarMelhorPetshop(String data, int qtdPequenos, int qtdGrandes) {
+    @Autowired
+    private ModelResponse mr;
+
+    public ResponseEntity<?> encontrarMelhorPetshop(String data, int qtdPequenos, int qtdGrandes) {
         Iterable<PetshopModel> petshops = listar();
         PetshopModel melhorPetshop = null;
         double melhorPreco = Double.MAX_VALUE;
@@ -28,15 +33,20 @@ public class PetshopService {
 
         for(PetshopModel petshop: petshops) {
             double precoTotal = calcularPrecoTotal(petshop, data, qtdPequenos, qtdGrandes);
+            if (precoTotal == 0.0) {
+                mr.setMensagem("Por favor, digite um número válido!");
+                return new ResponseEntity<ModelResponse>(mr,HttpStatus.BAD_REQUEST);
+            }
+
             if (precoTotal < melhorPreco || (precoTotal == melhorPreco && petshop.getDistancia() < menorDistancia)) {
                 menorDistancia = petshop.getDistancia();
                 melhorPetshop = petshop;
                 melhorPreco = precoTotal;
             }
         }
-
-        return "Melhor petshop: " + melhorPetshop.getNome() + "   |   " + 
-        "Preço total: R$ " + melhorPreco;
+        mr.setMensagem("Melhor petshop: " + melhorPetshop.getNome() + "   |   " + 
+        "Preço total: R$ " + melhorPreco);
+        return new ResponseEntity<ModelResponse>(mr,HttpStatus.OK);
     }
 
     public double calcularPrecoTotal (PetshopModel petshop, String data, int qtdPequenos, int qtdGrandes) {
@@ -53,6 +63,10 @@ public class PetshopService {
         } else {
             precoPequenos = petshop.getPrecoPequeno();
             precoGrande = petshop.getPrecoGrande();
+        }
+        
+        if (precoPequenos == 0 && precoGrande == 0) {
+            return 0.0;
         }
 
         double precoTotal = (qtdPequenos * precoPequenos) + (qtdGrandes * precoGrande);

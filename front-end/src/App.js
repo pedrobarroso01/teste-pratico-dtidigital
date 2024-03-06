@@ -39,11 +39,12 @@ function App() {
       if (!retorno.ok) {
         throw new Error('Erro ao receber a resposta da API');
       }
-      return retorno.text();
+      return retorno.json();
     })
-    .then(retorno_texto => {
-      console.log("Resposta da API:", retorno_texto);
-      setRetornoAPI(retorno_texto)
+    .then(retorno_json => {
+      console.log(retorno_json);
+      console.log("Resposta da API:", retorno_json.body.mensagem);
+      setRetornoAPI(retorno_json.body.mensagem)
     })
     .catch(error => {
       console.error("Erro ao fazer a solicitação:", error);
@@ -53,12 +54,12 @@ function App() {
   return (
     <div className="App">
       <div class = "header">
-        <img src={pessoa}></img>
+        <img src={pessoa} alt="Eduardo"></img>
         <h1> Cães do Lar Canil</h1>
       </div>
       <div class = "content">
       <Formulario eventoTeclado={aoDigitar} consumir={encontrar} resposta={retornoAPI}/> 
-      <img src={dog}></img>
+      <img src={dog} alt = "Cachorro"></img>
       </div>
     </div>
   );
