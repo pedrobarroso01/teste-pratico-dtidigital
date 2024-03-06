@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 import br.com.dtidigital.backend.models.PetshopModel;
 import br.com.dtidigital.backend.repository.PetshopRepository;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.DayOfWeek;
+
+
 
 @Service
 public class PetshopService {
@@ -35,8 +40,20 @@ public class PetshopService {
     }
 
     public double calcularPrecoTotal (PetshopModel petshop, String data, int qtdPequenos, int qtdGrandes) {
-        double precoPequenos = petshop.getPrecoPequeno();
-        double precoGrande = petshop.getPrecoGrande();
+        double precoPequenos = 0.0;
+        double precoGrande = 0.0;
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate data_formatada = LocalDate.parse(data, formato);
+
+        DayOfWeek day = data_formatada.getDayOfWeek(); 
+        if (day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
+            precoPequenos = petshop.getPrecoPequenoFDS();
+            precoGrande = petshop.getPrecoGrandeFDS();
+
+        } else {
+            precoPequenos = petshop.getPrecoPequeno();
+            precoGrande = petshop.getPrecoGrande();
+        }
 
         double precoTotal = (qtdPequenos * precoPequenos) + (qtdGrandes * precoGrande);
 
