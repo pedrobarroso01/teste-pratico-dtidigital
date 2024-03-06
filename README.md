@@ -44,3 +44,6 @@ O Front-end em React foi recomendado pela DtiDigital, então decidi seguir a rec
 Explicação: 
 
 O Front-end envia uma requisição do tipo Post para a API com os campos (data, qtdPequenos e qtdGrandes). A partir disso, a API realiza os calculos de preço total, levando em consideração a distância, o dia da semana(data), a quantidade de cães e encontra o melhor Petshop possível.
+
+## Observações
+Decidi cadastrar diretamente no banco de dados o preço dos banhos no final de semana, porque nem todos os Petshops aumentam em porcentagem e alguns inclusive continuam o mesmo preço, então não achei possível fazer uma lógica nesse sentido.
