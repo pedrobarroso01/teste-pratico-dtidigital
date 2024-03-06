@@ -38,6 +38,8 @@ O Front-end em React foi recomendado pela DtiDigital, então decidi seguir a rec
 
 * Testes e Qualidade do Software: Assume-se que serão realizados testes adequados para garantir a qualidade do software e que os defeitos identificados serão corrigidos antes da implantação.
 
+* Validação: Assume-se que os campos estão validados corretamente garantindo integridade dos dados.
+
 ## Diagrama de classe
 ![alt text](diagrama-de-classe.png)
 
