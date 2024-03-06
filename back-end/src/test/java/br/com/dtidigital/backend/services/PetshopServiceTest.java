@@ -1,12 +1,19 @@
 package br.com.dtidigital.backend.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
+import br.com.dtidigital.backend.models.ModelResponse;
 import br.com.dtidigital.backend.models.PetshopModel;
 import br.com.dtidigital.backend.repository.PetshopRepository;
 
@@ -14,44 +21,44 @@ import br.com.dtidigital.backend.repository.PetshopRepository;
 public class PetshopServiceTest {
 
     @Autowired
-    private PetshopService ps;
+    private PetshopService petshopService;
 
     @MockBean
-    private PetshopRepository pr;
+    private PetshopRepository petshopRepository;
 
-    @Test
-    public void testCalcularPrecoTotal() {
-        PetshopModel petshop = new PetshopModel("Meu Canino Feliz", 2000, 20.0, 40.0, 22.0, 44.0);
-        String data = "2024-03-05"; //Dia útil 
-        int qtdPequenos = 2;
-        int qtdGrandes = 3;
-
-        //Preço retornado do calculo
-        double precoTotal = ps.calcularPrecoTotal(petshop, data, qtdPequenos, qtdGrandes);
-
-        //Preço esperado para um dia útil
-        double precoEsperado = (qtdPequenos * petshop.getPrecoPequeno()) + (qtdGrandes * petshop.getPrecoGrande());
-
-        assertEquals(precoEsperado, precoTotal, 0.001); // 0.001 de margem de erro devido a possíveis arredondamentos
+    @BeforeEach
+    void setUp() {
+        PetshopModel petshop = new PetshopModel("Meu Canino Feliz", 2000, 20.0, 40.0, 24.0, 48.0);
+        when(petshopRepository.findAll()).thenReturn(Arrays.asList(petshop));
     }
 
     @Test
-    public void testCalcularPrecoTotalFinalDeSemana() {
-        PetshopModel petshop = new PetshopModel("Meu Canino Feliz", 2000, 20.0, 40.0, 22.0, 44.0);
-        String data = "2024-03-09"; //Final de Semana
+    public void testEncontrarMelhorPetshopDiaUtil() {
+        // Configuração do cenário
+        String data = "2024-03-06";
         int qtdPequenos = 2;
         int qtdGrandes = 3;
 
-        //Preço retornado do calculo
-        double precoTotal = ps.calcularPrecoTotal(petshop, data, qtdPequenos, qtdGrandes);
+        // Execução do método sob teste
+        ResponseEntity<ModelResponse> response = petshopService.encontrarMelhorPetshop(data, qtdPequenos, qtdGrandes);
 
-        //Preço esperado para o final de semana
-        double precoEsperado = (qtdPequenos * petshop.getPrecoPequenoFDS()) + (qtdGrandes * petshop.getPrecoGrandeFDS());
+        // Verificação do resultado
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Melhor petshop: Meu Canino Feliz   |   Preço total: R$ 160.0", response.getBody().getMensagem());
+    }
 
-        assertEquals(precoEsperado, precoTotal, 0.001); // 0.001 de margem de erro devido a possíveis arredondamentos
+    @Test
+    public void testEncontrarMelhorPetshopFinalDeSemana() {
+        // Configuração do cenário
+        String data = "2024-03-09";
+        int qtdPequenos = 2;
+        int qtdGrandes = 3;
+
+        // Execução do método sob teste
+        ResponseEntity<ModelResponse> response = petshopService.encontrarMelhorPetshop(data, qtdPequenos, qtdGrandes);
+
+        // Verificação do resultado
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Melhor petshop: Meu Canino Feliz   |   Preço total: R$ 192.0", response.getBody().getMensagem());
     }
 }
-
-
-
-

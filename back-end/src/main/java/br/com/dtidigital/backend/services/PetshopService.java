@@ -25,7 +25,7 @@ public class PetshopService {
     @Autowired
     private ModelResponse mr;
 
-    public ResponseEntity<?> encontrarMelhorPetshop(String data, int qtdPequenos, int qtdGrandes) {
+    public ResponseEntity<ModelResponse> encontrarMelhorPetshop(String data, int qtdPequenos, int qtdGrandes) {
         Iterable<PetshopModel> petshops = listar();
         PetshopModel melhorPetshop = null;
         double melhorPreco = Double.MAX_VALUE;
@@ -44,6 +44,7 @@ public class PetshopService {
                 melhorPreco = precoTotal;
             }
         }
+
         mr.setMensagem("Melhor petshop: " + melhorPetshop.getNome() + "   |   " + 
         "Preço total: R$ " + melhorPreco);
         return new ResponseEntity<ModelResponse>(mr,HttpStatus.OK);

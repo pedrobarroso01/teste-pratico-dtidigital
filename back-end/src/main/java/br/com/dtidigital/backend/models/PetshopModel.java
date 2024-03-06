@@ -24,9 +24,19 @@ public class PetshopModel {
     @Column(name = "precograndefds")
     private Double precoGrandeFDS = 0.0;
 
-    public PetshopModel(String nome, int distancia, double precoPequeno, double precoGrande, double precoPequenoFDS, double precoGrandeFDS) {
+    public PetshopModel() {
+        // Construtor vazio
     }
 
+    public PetshopModel(String nome, int distancia, double precoPequeno, double precoGrande, Double precoPequenoFDS,
+            Double precoGrandeFDS) {
+        this.nome = nome;
+        this.distancia = distancia;
+        this.precoPequeno = precoPequeno;
+        this.precoGrande = precoGrande;
+        this.precoPequenoFDS = precoPequenoFDS;
+        this.precoGrandeFDS = precoGrandeFDS;
+    }
 
     public long getId() {
         return id;
