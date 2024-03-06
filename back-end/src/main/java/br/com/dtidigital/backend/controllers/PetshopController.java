@@ -1,6 +1,5 @@
 package br.com.dtidigital.backend.controllers;
 
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +24,8 @@ public class PetshopController {
 
     @RequestMapping(path="/encontrar",method = RequestMethod.POST)
     public ResponseEntity<?> encontrarMelhorPetshop(@RequestBody PetshopRequest request) {
-        int a = petshopService.encontrarMelhorPetshop(request.getData(), request.getQtdPequenos(), request.getQtdGrandes());
-        return ResponseEntity.ok(a);
+        String melhorPetshop = petshopService.encontrarMelhorPetshop(request.getData(), request.getQtdPequenos(), request.getQtdGrandes());
+        return ResponseEntity.ok(melhorPetshop);
     } 
 
     @Autowired
